@@ -1,8 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.12;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./AggregatorV3Interface.sol";
+
+
 
 contract BirthdayCard is ERC721 {
+
+    AggregatorV3Interface internal priceFeed;
+
     event BirthdayCardCreated (
         uint tokenId,
         string imageURL,
@@ -10,7 +16,24 @@ contract BirthdayCard is ERC721 {
         address payable from
     );
 
-    constructor() ERC721("Bday", "BDAY") public  {}
+    constructor() ERC721("Bday", "BDAY") public  {
+        priceFeed = AggregatorV3Interface(0x5498BB86BC934c8D34FDA08E81D444153d0D06aD);
+    }
+
+    /**
+     * Returns the latest price
+     */
+    function getLatestPrice() public view returns (int) {
+        (
+            uint80 roundID,
+            int price,
+            uint startedAt,
+            uint timeStamp,
+            uint80 answeredInRound
+        ) = priceFeed.latestRoundData();
+        return price;
+    }
+
 
     function mintBirthdayCard(string memory _tokenURI) external {
         uint _tokenId = totalSupply().add(1);

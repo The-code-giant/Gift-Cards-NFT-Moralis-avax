@@ -19,7 +19,8 @@ import { StylesProvider } from '@material-ui/core/styles'
 import './Navbar.css'
 import logo from '../../../images/logoOfficial.jpg'
 
-export const Navbar = withRouter(({ account, connectWallet }) => {
+// export const Navbar = withRouter(({ account, connectWallet }) => {
+export const Navbar = withRouter(({ authenticate, isAuthenticated, user }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
 
@@ -136,11 +137,13 @@ export const Navbar = withRouter(({ account, connectWallet }) => {
 
             <div className="grow" />
             <div className="sectionDesktop">
-              {account ? (
+              {isAuthenticated ? (
                 <>
                   <Button className="whiteLink" to="/create-pet">
-                    {account.substring(0, 8)}...{account.substring(32, 24)}
+                    {user.get('username').substring(0, 6)}...
+                    {user.get('username').substring(20)}
                   </Button>
+                  {/* <p>{user.get(`accounts`)[0]}</p> */}
                   <Button
                     variant="contained"
                     className="connected-btn"
@@ -154,7 +157,7 @@ export const Navbar = withRouter(({ account, connectWallet }) => {
                   variant="contained"
                   className="connect-wallet-btn"
                   onClick={() => {
-                    connectWallet()
+                    authenticate()
                   }}
                 >
                   Connect Wallet

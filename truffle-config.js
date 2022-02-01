@@ -9,6 +9,17 @@ module.exports = {
       port: 7545,
       network_id: '*', // Match any network id
     },
+    avalanche: {
+      provider: () =>
+        new HDWalletProvider(
+          mnemonic,
+          'https://api.avax-test.network/ext/bc/C/rpc',
+        ),
+      network_id: 43113,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true,
+    },
     one: {
       provider: () =>
         new HDWalletProvider(mnemonic, 'https://api.s0.b.hmny.io'),

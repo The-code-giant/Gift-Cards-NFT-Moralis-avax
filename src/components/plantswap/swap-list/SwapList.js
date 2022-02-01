@@ -95,7 +95,7 @@ function SwapList({ account, contractData }) {
 
   return (
     <div style={{ minHeight: '40vh' }}>
-      <h2>My NFTs</h2>
+      <h2>My NFTs collection</h2>
       {loading ? (
         <CircularStatic />
       ) : (
@@ -144,7 +144,7 @@ function SwapList({ account, contractData }) {
                 </Grid>
               ))
             ) : (
-              <h2>No PlantSwaps Yet...</h2>
+              <h2>No Gifts Yet...</h2>
             )}
           </Grid>
         </div>
@@ -202,7 +202,7 @@ function SwapList({ account, contractData }) {
                 </Grid>
               ))
             ) : (
-              <h2>No PlantSwaps Yet...</h2>
+              <h2>No Gitfcards Yet...</h2>
             )}
           </Grid>
         </div>

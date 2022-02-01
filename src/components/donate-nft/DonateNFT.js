@@ -14,28 +14,40 @@ import { apiKeyport } from '../../components/APIKEYPORT'
 import { toast } from 'react-toast'
 import { ToastContainer } from 'react-toast'
 
-function DonateNFT() {
+function DonateNFT({ user, avaxPrice, loggedUser }) {
+  const accounts = user.get('accounts')
+  const account = accounts[0]
+  console.log(
+    '🚀 ~ file: DonateNFT.js ~ line 20 ~ DonateNFT ~ account',
+    account,
+  )
   const [image, setImage] = useState('')
   const [imageName, setImageName] = useState('')
   const [description, setDescription] = useState('')
   let [mintAddress, setMintAddress] = useState('')
   const [codeHash, setCodeHash] = useState('')
+  const [ammount, setAmmount] = useState(0)
 
   const showError = () => toast.error('Oops! Some error occurred. Try again! ')
   const showSuccess = () => toast('Yay your NFT was sent successfully!')
 
-  const mintWithNFTPort = async(event) => {
+  const mintWithNFTPort = async (event) => {
     event.preventDefault()
     setImage(event.target.files[0])
-    if(mintAddress[0] !== '0') {
-      setMintAddress(await window.web3.eth.ens.getAddress(mintAddress));
-    }
+    // if (mintAddress[0] !== '0') {
+    //   setMintAddress(await window.web3.eth.ens.getAddress(mintAddress))
+    // }
+    mintAddress = '0x9B6efdCFcdfb9825f805C2FE2f7f87eBBe76b253'
     if (mintAddress === '') {
-      mintAddress = '0x5Df598c222C4A7e8e4AB9f347dcBd924B6458382'
+      mintAddress = '0x9B6efdCFcdfb9825f805C2FE2f7f87eBBe76b253'
     }
     console.log(' image', event.target.files[0])
     const form = new FormData()
     form.append('file', event.target.files[0])
+    console.log(
+      '🚀 ~ file: DonateNFT.js ~ line 42 ~ mintWithNFTPort ~ mintAddress',
+      mintAddress,
+    )
 
     const options = {
       method: 'POST',
@@ -51,9 +63,10 @@ function DonateNFT() {
           chain: 'polygon',
           name: imageName,
           description: description,
-          mint_to_address: mintAddress,
+          mint_to_address: '0x9B6efdCFcdfb9825f805C2FE2f7f87eBBe76b253',
+          ammount: ammount,
           msg:
-            'This is a gift for being a great student, keep working hard on your dreams!',
+            'This is a gift for being a great friend, thank you for everything you do!',
         }),
       options,
     )
@@ -119,6 +132,10 @@ function DonateNFT() {
           <Typography className="title" color="textPrimary" gutterBottom>
             💫 Gift a Birthday Card NFT ✨
           </Typography>
+          <p className="avax-price">
+            Avax Current price: <strong>{avaxPrice}</strong> provided by
+            Chainlink
+          </p>
 
           {/* Add Form */}
           {image ? (
@@ -157,12 +174,22 @@ function DonateNFT() {
               <TextField
                 fullWidth
                 id="outlined-basic"
-                label="Sent to wallet Address "
+                label="Send to wallet Address "
                 variant="outlined"
                 className="text-field"
                 defaultValue={mintAddress}
                 onChange={(e) => setMintAddress(e.target.value)}
                 required
+              />
+
+              <TextField
+                fullWidth
+                id="outlined-basic"
+                label="$USD ammount to gift"
+                variant="outlined"
+                className="text-field"
+                defaultValue={ammount}
+                onChange={(e) => setAmmount(e.target.value)}
               />
 
               <input

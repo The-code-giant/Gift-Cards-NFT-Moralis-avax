@@ -37,6 +37,7 @@
         "react-confetti": "^6.0.1",
         "react-dom": "^17.0.2",
         "react-modal": "^3.14.3",
+        "react-moralis": "^1.1.0",
         "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
         "react-toast": "^1.0.3",
@@ -46,7 +47,7 @@
     },
     "scripts": {
         "deploy": "truffle migrate --network  matic --reset",
-        "start": "react-scripts start",
+        "start": "react-scripts --openssl-legacy-provider start",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"

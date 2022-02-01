@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import { Navbar } from './components/layout/navbar/Navbar'
@@ -7,29 +7,44 @@ import Home from './components/home/Home'
 import Projects from './components/home/Projects'
 import LoadingPage from './components/home/loadin-page/LoadingPage'
 import PetDetails from './components/home/pet-details/PetDetails'
-// import CreatePet from './components/create-post/CreatePet'
-// import PixelMaker from './components/pixelMaker/PixelMaker'
 import PageCommunity from './components/community/page-community/PageCommunity'
 import RegisterCommunity from './components/community/register-community/RegisterCommunity'
 import DonateNFT from './components/donate-nft/DonateNFT'
-
 import PlantswapContainer from './components/plantswap/plantswap-container/PlantswapContainer'
-
 import NftTemplates from './components/plantswap/nft-templates/NftTemplates'
-
 import NFTsListByAddress from './components/NFTsListByAddress/NFTsListByAddress'
 
 import Web3 from 'web3'
-// import MyPet from './abis/Pet.json'
-import community from './abis/Community.json'
-import randomNumChainLink from './abis/Random.json'
+import BirthdayCard from './abis/BirthdayCard.json'
+import { useMoralis } from 'react-moralis'
 
 function App() {
-  const [account, setAccount] = useState('')
+  const [loggedUser, setLoggedUser] = useState('')
   const [contractData, setContractData] = useState('')
   const [randomContract, setRandomContract] = useState('')
+  const [avaxPrice, setAvaxPrice] = useState(0)
+  const { authenticate, isAuthenticated, user } = useMoralis()
+  let currentUser
+  useEffect(() => {
+    loadWeb3()
+    getContract()
+  }, [])
 
   const loadWeb3 = async () => {
+    //   if (window.ethereum) {
+    //     let user = await Moralis.User.current();
+    //     await Moralis.Web3.enable();
+    //     let currentAddress = await window.ethereum.send("eth_requestAccounts");
+    //     currentAddress = currentAddress.result[0];
+    //     if (user && user.attributes.ethAddress == currentAddress) {
+    //       return user;
+    //     } else {
+    //       return await authenticate(provider);
+    //     }
+    //  } else {
+    //   alert("Non ethereum browser")
+    //  }
+
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum)
       await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -44,26 +59,22 @@ function App() {
 
   const getContract = async () => {
     const web3 = window.web3
-    const accounts = await web3.eth.getAccounts()
+    // console.log('user insiode getContract', user)
+    currentUser = await user?.attributes['ethAddress']
 
-    setAccount(accounts[0])
-    const networkId = await web3.eth.net.getId()
-    const networkData = community.networks[networkId]
+    setLoggedUser(currentUser)
+    const networkId = await web3?.eth.net.getId()
+    const networkData = BirthdayCard.networks[networkId]
 
     if (networkData) {
-      const abi = community.abi
-      const address = community.networks[networkId].address
+      const abi = BirthdayCard.abi
+      const address = BirthdayCard.networks[networkId].address
       const myContract = new web3.eth.Contract(abi, address)
+      console.log('getContract ~ myContract', myContract)
       setContractData(myContract)
-
-      // randomNumChainLink
-      // const abiChainlink = randomNumChainLink.abi
-      // const addressChainlink = randomNumChainLink.networks[networkId].address
-      // const myRandom = new web3.eth.Contract(abiChainlink, addressChainlink)
-      // const res = await myRandom.randomResult().call()
-      // console.log('🚀 ~ file: App.js ~ line 58 ~ getContract ~ res', res)
-
-      // setRandomContract(myRandom)
+      let avaxPrice = await myContract.methods.getLatestPrice().call()
+      setAvaxPrice(avaxPrice / 10 ** 8)
+      console.log('++++++ avaxPrice', avaxPrice / 10 ** 8)
     } else {
       window.alert(
         'Contract is not deployed to the detected network. Connect to the correct network!',
@@ -76,54 +87,77 @@ function App() {
     await getContract()
   }
 
-  console.log('contractData', contractData)
   return (
     <Router>
       <div className="cl">
-        <Navbar account={account} connectWallet={connectWallet} />
+        {/* <Navbar account={account} connectWallet={connectWallet} /> */}
+        <Navbar
+          authenticate={authenticate}
+          isAuthenticated={isAuthenticated}
+          loggedUser={loggedUser}
+          user={user}
+        />
         <Route exact path="/" component={LoadingPage} />
         <Route exact path="/old" component={Home} />
         <Switch>
           <Route exact path="/donate" component={DonateNFT} />
 
           <Route exact path="/giftcard">
-            <DonateNFT account={account} contractData={contractData} />
+            <DonateNFT
+              user={user}
+              avaxPrice={avaxPrice}
+              loggedUser={loggedUser}
+              contractData={contractData}
+            />
           </Route>
 
           <Route exact path="/create">
-            <RegisterCommunity account={account} contractData={contractData} />
+            <RegisterCommunity
+              loggedUser={loggedUser}
+              contractData={contractData}
+            />
           </Route>
 
           <Route exact path="/projects">
-            <Projects account={account} contractData={contractData} />
+            <Projects loggedUser={loggedUser} contractData={contractData} />
           </Route>
 
           <Route exact path="/collection/wallet-address">
-            <NFTsListByAddress account={account} contractData={contractData} />
+            <NFTsListByAddress
+              loggedUser={loggedUser}
+              contractData={contractData}
+              user={user}
+            />
           </Route>
 
           <Route exact path="/app">
-            <LoadingPage account={account} contractData={contractData} />
+            <LoadingPage loggedUser={loggedUser} contractData={contractData} />
           </Route>
 
           <Route exact path="/my-collection">
-            <PlantswapContainer account={account} contractData={contractData} />
+            <PlantswapContainer
+              loggedUser={loggedUser}
+              contractData={contractData}
+            />
           </Route>
 
           <Route exact path="/nft-templates">
-            <NftTemplates account={account} contractData={contractData} />
+            <NftTemplates loggedUser={loggedUser} contractData={contractData} />
           </Route>
 
           <Route path="/card-details/:cid">
             <PetDetails
-              account={account}
+              user={user}
               contractData={contractData}
               randomContract={randomContract}
             />
           </Route>
 
           <Route path="/project/:projectId">
-            <PageCommunity account={account} contractData={contractData} />
+            <PageCommunity
+              loggedUser={loggedUser}
+              contractData={contractData}
+            />
           </Route>
         </Switch>
         <Footer />

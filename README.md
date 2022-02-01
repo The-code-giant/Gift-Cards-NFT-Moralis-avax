@@ -2,7 +2,7 @@
 
 ### Slogan:
 
-Turn your Birthday Cards into NFTs, digitalize your memories forever.
+ Turn your Birthday Cards into NFTs, digitalize your memories forever.
 
 Overview:
 NFT Birthday Cards is an app that helps you digitalize your memories forever. Join us to create, trade, and sell your Birthday Cards. NFT Birthday Card is a platform that helps you protect your important memories, moments, and wishes.

@@ -18,7 +18,10 @@ import {
 } from '@material-ui/core'
 import './PetDetails.css'
 
-function PetDetails({ account, contractData }) {
+function PetDetails({ user, contractData }) {
+  const accounts = user.get('accounts')
+  const account = accounts[0]
+  console.log('🚀 account', account)
   const { cid } = useParams()
   const [image, setPetImage] = useState('')
   const [petName, setPetName] = useState('')
@@ -53,10 +56,10 @@ function PetDetails({ account, contractData }) {
     setPetCategory(petCategory)
   }
 
-  const mintNFT = async (petId) => {
+  const mintNFT = async (cid) => {
     try {
       const data = await contractData.methods
-        .mintPetNFT(`https://${petId}`)
+        .mintBirthdayCard(`https://${cid}`)
         .send({ from: account })
 
       setCodeHash(data)

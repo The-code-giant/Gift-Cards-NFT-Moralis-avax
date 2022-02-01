@@ -263,7 +263,7 @@ function RegisterCommunity({ account, contractData }) {
               gutterBottom
               style={{ paddingTop: '1rem', paddingBottom: '1rem' }}
             >
-              Please add your wishes for Albert Lee ~
+              Please add your wishes~
             </Typography>
           </Grid>
           <Grid item xs={6}>

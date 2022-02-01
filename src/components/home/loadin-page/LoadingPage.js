@@ -62,12 +62,16 @@ function LoadingPage({
         <section className="hero" role="banner">
           <div className="container">
             <div className="hero__text container--pall">
-              <h1>Protect your ideas, work, projects and more.</h1>
+              <h2>
+                Protect your relationships, memories, and thoughtful messages by
+                converting them into NFTs
+              </h2>
               <p>
-                We help students, professors, and anyone to protect their
-                intellectual ideas through a decentralized and transparent way
-                using blockchain technology to document their journey from start
-                to finish.
+                We help people to protect their Birthday Cards and convert them
+                into NFTs through a decentralized and transparent way using
+                blockchain technology to document their journey from start to
+                finish. No more birthday cards ending up in the trash, with NFT
+                Birthday Cards you can collect, create, trade, and sell them.
               </p>
               <Link to="/projects" className="button-gren-padding hero_cta">
                 Get Started
@@ -85,9 +89,9 @@ function LoadingPage({
             <div className="feature__intro">
               <h2>How does it work?</h2>
               <p>
-                It's a simple process, just come up with a project/idea, start
-                building, and get fund it. Make your dream come true and let the
-                world discover your talent.
+                It's a simple process, just come up with a design/idea, start
+                designing, and invite others to sign the birthday card. Make
+                your dream come true and let the world discover your talent.
               </p>
             </div>
 
@@ -100,8 +104,9 @@ function LoadingPage({
                   Share your idea with the world
                 </div>
                 <div className="feature__description">
-                  Share your awesome idea, project, research, or mission so
-                  others can financially support or contribute.
+                  Share the NFT Birthday Card with that special someone: Share
+                  your awesome idea, design, thoughtful message, or good wishes
+                  with your loved ones.
                 </div>
               </div>
 
@@ -111,8 +116,8 @@ function LoadingPage({
                 </div>
                 <div className="feature__title">Get a Non Fungible Token</div>
                 <div className="feature__description">
-                  Each idea is represented as an NFT that holds your valuable
-                  work and idea.
+                  Register your NFT Birthday Card Each NFT Birthday Card is
+                  represented as an NFT that holds your valuable work and ideas.
                 </div>
               </div>
 
@@ -121,12 +126,13 @@ function LoadingPage({
                   <img src={img3} alt="api" />
                 </div>
                 <div className="feature__title">
-                  Find contributors, investors, and mentors.
+                  {' '}
+                  Find contributors, family, and friends.
                 </div>
                 <div className="feature__description">
-                  Invite people, makers, mentors, and expert advisors to your
-                  project. Anyone can see ideas, but only members who purchase
-                  your idea NFT can access the community.
+                  Invite people, family, friends, and even coworkers to sign up
+                  for the birthday card. Anyone can see the NFT birthday card,
+                  but only members who are invited can access the NFT.
                 </div>
               </div>
 
@@ -136,7 +142,8 @@ function LoadingPage({
                 </div>
                 <div className="feature__title">Get fund it</div>
                 <div className="feature__description">
-                  Offer potential funders incentives to invest in your idea.
+                  Sell your Designs and get fund it List your NFT template and
+                  offer potential deals for users to buy your design.
                 </div>
               </div>
             </div>

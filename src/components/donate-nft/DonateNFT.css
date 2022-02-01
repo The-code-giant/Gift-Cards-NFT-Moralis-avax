@@ -17,10 +17,12 @@
 
 .form-container {
     border: 1px solid #0000003d;
+    margin-top: -17px;
 }
 
 form {
     padding: 1rem;
+    padding-bottom: 8rem;
 }
 
 .img-preview {
