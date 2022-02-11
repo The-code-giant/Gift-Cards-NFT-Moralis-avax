@@ -18,10 +18,10 @@ import {
 } from '@material-ui/core'
 import './PetDetails.css'
 
-function PetDetails({ user, contractData }) {
-  const accounts = user.get('accounts')
-  const account = accounts[0]
-  console.log('🚀 account', account)
+function PetDetails({ unstoppableName, login }) {
+  // const accounts = user.get('accounts')
+  // const account = accounts[0]
+  // console.log('🚀 account', account)
   const { cid } = useParams()
   const [image, setPetImage] = useState('')
   const [petName, setPetName] = useState('')
@@ -37,7 +37,7 @@ function PetDetails({ user, contractData }) {
       getImage()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cid, contractData])
+  }, [cid])
 
   const getImage = (ipfsURL) => {
     if (!ipfsURL) return
@@ -56,17 +56,17 @@ function PetDetails({ user, contractData }) {
     setPetCategory(petCategory)
   }
 
-  const mintNFT = async (cid) => {
-    try {
-      const data = await contractData.methods
-        .mintBirthdayCard(`https://${cid}`)
-        .send({ from: account })
+  // const mintNFT = async (cid) => {
+  //   try {
+  //     const data = await contractData.methods
+  //       .mintBirthdayCard(`https://${cid}`)
+  //       .send({ from: account })
 
-      setCodeHash(data)
-    } catch (err) {
-      console.error(err)
-    }
-  }
+  //     setCodeHash(data)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
 
   const handleChange = (event) => {
     setInput(event.target.value)
@@ -74,8 +74,13 @@ function PetDetails({ user, contractData }) {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    setComment(input)
-    setInput('')
+    if (!unstoppableName) {
+      // window.alert('Please Connect your wallet'
+      login()
+    } else {
+      setComment(input)
+      setInput('')
+    }
   }
 
   return (
@@ -94,7 +99,6 @@ function PetDetails({ user, contractData }) {
                   variant="contained"
                   className="wallet-btn"
                   color="primary"
-                  onClick={mintNFT}
                 >
                   Add to Collection
                 </Button>
@@ -194,7 +198,7 @@ function PetDetails({ user, contractData }) {
                           className="inline"
                           color="textPrimary"
                         >
-                          {account}:
+                          {unstoppableName}:
                         </Typography>
                         {` ${comment}`}
                       </React.Fragment>

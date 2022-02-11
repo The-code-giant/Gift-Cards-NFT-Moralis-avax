@@ -46,8 +46,9 @@ p {
     position: relative;
     display: inline-block;
     padding: 0.875rem 2.1875rem;
-    /* background-image: linear-gradient(to right, #f4e81f, #fe05ce); */
-    background-image: linear-gradient(to right, #31d35c, #2bb7da);
+    background-image: linear-gradient(to right, #f4e81f, #fe05ce);
+    /* background-image: linear-gradient(to right, #31d35c, #2bb7da);
+    background-image: linear-gradient(to right, #fe05ce, #04add6); */
     border-radius: 50px;
     border: 0;
     cursor: pointer;
@@ -97,4 +98,15 @@ p {
 
 p {
     color: #9698a6;
+}
+
+.second-row {
+    padding-top: 2rem;
+    font-size: 1.3rem;
+    padding-left: 2rem;
+}
+
+.copyright {
+    font-size: 1.2rem;
+    padding-left: 2rem;
 }

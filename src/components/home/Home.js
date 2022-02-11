@@ -31,7 +31,7 @@ function Home() {
             <div className="label-btns">
               <Chip
                 size="medium"
-                label="Today"
+                label="All Cards"
                 color="primary"
                 clickable
                 onClick={handleDelete}
@@ -39,21 +39,21 @@ function Home() {
 
               <Chip
                 size="medium"
-                label="Last Week"
+                label="Birthday"
                 clickable
                 onClick={handleDelete}
               />
 
               <Chip
                 size="medium"
-                label="Last Month"
+                label="Valentines Day"
                 clickable
                 onClick={handleDelete}
               />
 
               <Chip
                 size="medium"
-                label="All Time"
+                label="Anniversary"
                 clickable
                 onClick={handleDelete}
               />

@@ -1,10 +1,22 @@
-# NFT Birthday Cards
+## NFT Birthday Cards
 
-### Slogan:
+<i>NFT Birthday Cards is a platform that helps you protect your important memories, moments, and wishes.
+No more birthday cards ending up in the trash. With NFT Birthday Cards you can collect Birthday Cards, create, trade, and sell them.
+</i>
 
- Turn your Birthday Cards into NFTs, digitalize your memories forever.
+## Project info:
 
-Overview:
+- Website demo [https://nft-birthday-cards.netlify.app](https://nft-birthday-cards.netlify.app/)
+- Video link: https://youtu.be/4OfKt1ALEJY
+- Discord: metaversemoon#4240
+- UnstoppableDomain email account: metaversemoon@gmail.com
+
+---
+
+![Main Page](https://raw.githubusercontent.com/metaversemoon/NFT-cards/main/collection.png) <br> <br>
+
+### Project Full details:
+
 NFT Birthday Cards is an app that helps you digitalize your memories forever. Join us to create, trade, and sell your Birthday Cards. NFT Birthday Card is a platform that helps you protect your important memories, moments, and wishes.
 No more birthday cards ending up in the trash. With NFT Birthday Cards you can collect Birthday Cards, create, trade, and sell them.
 
@@ -60,14 +72,6 @@ NFTStorage: the data is stored on NFTStorage IPFS, the generated hash (CID) will
 * Frontend: React Js for the frontend, Material-UI, and Web3 to connect to the blockchain.
 
 * Summary: This project is made using solidity for the smart contract, ReactJs, Material-UI for the frontend, Truffle for compiler, Covalent to gather users ERC20 tokens, NFTPort for minting NFTs on the Mumbai network. IPFSto store the NFT birthday card images and metadata. Deployed on Harmony testnet for cheap fees. ENS to allow users to enter their address to receive NFTs.
-
-## Demo
-
-Website Demo:
-
-- [Demo](Add link here)
-
-  ![Main Page]() <br> <br>
 
 # Getting Started
 

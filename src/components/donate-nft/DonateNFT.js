@@ -15,12 +15,9 @@ import { toast } from 'react-toast'
 import { ToastContainer } from 'react-toast'
 
 function DonateNFT({ user, avaxPrice, loggedUser }) {
-  const accounts = user.get('accounts')
-  const account = accounts[0]
-  console.log(
-    '🚀 ~ file: DonateNFT.js ~ line 20 ~ DonateNFT ~ account',
-    account,
-  )
+  // const accounts = user.get('accounts')
+  // const account = accounts[0]
+
   const [image, setImage] = useState('')
   const [imageName, setImageName] = useState('')
   const [description, setDescription] = useState('')
@@ -41,13 +38,9 @@ function DonateNFT({ user, avaxPrice, loggedUser }) {
     if (mintAddress === '') {
       mintAddress = '0x9B6efdCFcdfb9825f805C2FE2f7f87eBBe76b253'
     }
-    console.log(' image', event.target.files[0])
+
     const form = new FormData()
     form.append('file', event.target.files[0])
-    console.log(
-      '🚀 ~ file: DonateNFT.js ~ line 42 ~ mintWithNFTPort ~ mintAddress',
-      mintAddress,
-    )
 
     const options = {
       method: 'POST',

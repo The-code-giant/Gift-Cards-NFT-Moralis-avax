@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import AppBar from '@material-ui/core/AppBar'
@@ -18,14 +18,35 @@ import MoreIcon from '@material-ui/icons/MoreVert'
 import { StylesProvider } from '@material-ui/core/styles'
 import './Navbar.css'
 import logo from '../../../images/logoOfficial.jpg'
+import UAuth from '@uauth/js'
 
-// export const Navbar = withRouter(({ account, connectWallet }) => {
-export const Navbar = withRouter(({ authenticate, isAuthenticated, user }) => {
+export const Navbar = withRouter(({ login, logout, unstoppableName }) => {
   const [anchorEl, setAnchorEl] = React.useState(null)
+  // const [unstoppableName, setunstoppableName] = useState('')
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
-
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+
+  // const uauth = new UAuth({
+  //   clientID: '0T+orxPyp2ortCaGy4vz9PmBLlft/MzymiWa3LtD05Y=',
+  //   clientSecret: 'oBezW7f5/OrgyzwmwljqEU4rJHycww17b9RryazndP8=',
+  //   redirectUri: 'https://nft-birthday-cards.netlify.app/callback',
+  // })
+  // const login = async () => {
+  //   try {
+  //     const authorization = await uauth.loginWithPopup()
+  //     setunstoppableName(authorization.idToken.sub)
+  //   } catch (error) {
+  //     console.error(error)
+  //   }
+  // }
+  // const logout = () => {
+  //   console.log('logging out!')
+  //   uauth.logout().catch((error) => {
+  //     console.error('profile error:', error)
+  //   })
+  //   setunstoppableName('')
+  // }
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -137,54 +158,28 @@ export const Navbar = withRouter(({ authenticate, isAuthenticated, user }) => {
 
             <div className="grow" />
             <div className="sectionDesktop">
-              {isAuthenticated ? (
+              {unstoppableName ? (
                 <>
-                  <Button className="whiteLink" to="/create-pet">
-                    {user.get('username').substring(0, 6)}...
-                    {user.get('username').substring(20)}
-                  </Button>
-                  {/* <p>{user.get(`accounts`)[0]}</p> */}
                   <Button
                     variant="contained"
                     className="connected-btn"
                     endIcon={<VerifiedUserSharpIcon />}
                   >
-                    Connected
+                    {unstoppableName}
+                  </Button>
+                  <Button className="whiteLink" onClick={() => logout()}>
+                    Logout
                   </Button>
                 </>
               ) : (
                 <Button
                   variant="contained"
-                  className="connect-wallet-btn"
-                  onClick={() => {
-                    authenticate()
-                  }}
+                  className="connected-btn"
+                  onClick={() => login()}
                 >
                   Connect Wallet
                 </Button>
               )}
-
-              <IconButton
-                edge="end"
-                aria-label="account of current user"
-                aria-controls={menuId}
-                aria-haspopup="true"
-                onClick={handleProfileMenuOpen}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-            </div>
-            <div className="sectionMobile">
-              <IconButton
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
             </div>
           </Toolbar>
         </AppBar>

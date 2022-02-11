@@ -9,19 +9,19 @@ import {
   Typography,
 } from '@material-ui/core'
 import './Footer.css'
-import logo from '../../../images/catlogo.png'
+import logo from '../../../images/logoOfficial.jpg'
 
 function Footer() {
   return (
     <StylesProvider injectFirst>
-      <footer>
+      <footer className="footer-container">
         <AppBar className="primary-color marginT-3 pad-2" position="static">
           <Grid component={Container} container>
-            <Grid item xs={12} sm={3}>
+            {/* <Grid item xs={12} sm={3}>
               <img src={logo} alt="logo" className="footer-logo" />
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12} sm={9} className="links">
+            <Grid item xs={12} sm={12} className="links footer-grid">
               <Link className="link" component={RouterLink} to="/">
                 Home
               </Link>
@@ -33,7 +33,7 @@ function Footer() {
               <span>/</span>
 
               <Link className="link" component={RouterLink} to="/">
-                Create a Pet
+                Register
               </Link>
               <span>/</span>
 
@@ -54,7 +54,7 @@ function Footer() {
 
             <Grid item xs={12} sm={3}></Grid>
 
-            <Grid item xs={12} sm={9}>
+            <Grid item xs={12} sm={12}>
               <Typography className="copyright">
                 Copyright &copy; {new Date().getFullYear()} NFT_BirthdayCards
               </Typography>

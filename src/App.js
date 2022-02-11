@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
 import { Navbar } from './components/layout/navbar/Navbar'
 import Footer from './components/layout/footer/Footer'
@@ -13,6 +13,7 @@ import DonateNFT from './components/donate-nft/DonateNFT'
 import PlantswapContainer from './components/plantswap/plantswap-container/PlantswapContainer'
 import NftTemplates from './components/plantswap/nft-templates/NftTemplates'
 import NFTsListByAddress from './components/NFTsListByAddress/NFTsListByAddress'
+import UAuth from '@uauth/js'
 
 import Web3 from 'web3'
 import BirthdayCard from './abis/BirthdayCard.json'
@@ -25,26 +26,37 @@ function App() {
   const [avaxPrice, setAvaxPrice] = useState(0)
   const { authenticate, isAuthenticated, user } = useMoralis()
   let currentUser
+  const [unstoppableName, setunstoppableName] = useState('')
+
   useEffect(() => {
-    loadWeb3()
-    getContract()
+    // loadWeb3()
+    // getContract()
   }, [])
 
-  const loadWeb3 = async () => {
-    //   if (window.ethereum) {
-    //     let user = await Moralis.User.current();
-    //     await Moralis.Web3.enable();
-    //     let currentAddress = await window.ethereum.send("eth_requestAccounts");
-    //     currentAddress = currentAddress.result[0];
-    //     if (user && user.attributes.ethAddress == currentAddress) {
-    //       return user;
-    //     } else {
-    //       return await authenticate(provider);
-    //     }
-    //  } else {
-    //   alert("Non ethereum browser")
-    //  }
+  const uauth = new UAuth({
+    clientID: '0T+orxPyp2ortCaGy4vz9PmBLlft/MzymiWa3LtD05Y=',
+    clientSecret: 'oBezW7f5/OrgyzwmwljqEU4rJHycww17b9RryazndP8=',
+    redirectUri: 'https://nft-birthday-cards.netlify.app/callback',
+  })
 
+  const login = async () => {
+    try {
+      const authorization = await uauth.loginWithPopup()
+      setunstoppableName(authorization.idToken.sub)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const logout = () => {
+    console.log('logging out!')
+    uauth.logout().catch((error) => {
+      console.error('profile error:', error)
+    })
+    setunstoppableName('')
+  }
+
+  const loadWeb3 = async () => {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum)
       await window.ethereum.request({ method: 'eth_requestAccounts' })
@@ -92,10 +104,9 @@ function App() {
       <div className="cl">
         {/* <Navbar account={account} connectWallet={connectWallet} /> */}
         <Navbar
-          authenticate={authenticate}
-          isAuthenticated={isAuthenticated}
-          loggedUser={loggedUser}
-          user={user}
+          login={login}
+          logout={logout}
+          unstoppableName={unstoppableName}
         />
         <Route exact path="/" component={LoadingPage} />
         <Route exact path="/old" component={Home} />
@@ -146,11 +157,7 @@ function App() {
           </Route>
 
           <Route path="/card-details/:cid">
-            <PetDetails
-              user={user}
-              contractData={contractData}
-              randomContract={randomContract}
-            />
+            <PetDetails unstoppableName={unstoppableName} login={login} />
           </Route>
 
           <Route path="/project/:projectId">

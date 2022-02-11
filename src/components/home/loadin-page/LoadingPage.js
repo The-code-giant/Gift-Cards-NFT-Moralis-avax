@@ -98,7 +98,7 @@ function LoadingPage({
             <div className="feature__grid">
               <div className="feature__item">
                 <div className="feature__icon">
-                  <img src={img1} alt="online" />
+                  <img src={img1} className="t" alt="online" />
                 </div>
                 <div className="feature__title">
                   Share your idea with the world

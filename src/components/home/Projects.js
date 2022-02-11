@@ -28,30 +28,44 @@ function Projects() {
           {/* <h2>Browse, search or add  NFT's to your collections.</h2> */}
           <div className="label-btns">
             <Chip
-              size="small"
-              label="Today"
+              size="medium"
+              label="All Cards"
               color="primary"
               clickable
               onClick={handleDelete}
             />
 
             <Chip
-              size="small"
-              label="Last Week"
+              size="medium"
+              label="Birthday"
               clickable
               onClick={handleDelete}
             />
 
             <Chip
-              size="small"
-              label="Last Month"
+              size="medium"
+              label="Valentines Day"
               clickable
               onClick={handleDelete}
             />
 
             <Chip
-              size="small"
-              label="All Time"
+              size="medium"
+              label="Anniversary"
+              clickable
+              onClick={handleDelete}
+            />
+
+            <Chip
+              size="medium"
+              label="Wedding"
+              clickable
+              onClick={handleDelete}
+            />
+
+            <Chip
+              size="medium"
+              label="Christmas"
               clickable
               onClick={handleDelete}
             />

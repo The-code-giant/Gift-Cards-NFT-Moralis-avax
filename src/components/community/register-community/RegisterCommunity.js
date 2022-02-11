@@ -161,30 +161,6 @@ function RegisterCommunity({ account, contractData }) {
     console.log(imageName, imageType)
   }
 
-  // const saveToTextile = async () => {
-  //   try {
-  //     // connects to ethereum & web3
-  //     await window.ethereum.enable()
-  //     const provider = new providers.Web3Provider(window.ethereum)
-  //     const wallet = provider.getSigner()
-  //     // const storage = await init(wallet)
-
-  //     // creates a file to save data
-  //     const communityImage = new Blob([image], { type: 'text/plain' })
-  //     const file = new File([communityImage], 'community.txt', {
-  //       type: 'text/plain',
-  //       lastModified: new Date().getTime(),
-  //     })
-
-  //     // await storage.addDeposit()
-  //     const { cid } = await storage.store(file)
-  //     let formattedCid = cid['/']
-  //     return formattedCid
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
-
   const saveToNFTStorage = async () => {
     console.log(
       'all info',
@@ -257,14 +233,14 @@ function RegisterCommunity({ account, contractData }) {
       <Container style={{ minHeight: '70vh', paddingBottom: '3rem' }}>
         <Grid container spacing={1} className="padding-top">
           <Grid item xs={6}>
-            <Typography
+            {/* <Typography
               className="title"
               color="textPrimary"
               gutterBottom
               style={{ paddingTop: '1rem', paddingBottom: '1rem' }}
             >
               Please add your wishes~
-            </Typography>
+            </Typography> */}
           </Grid>
           <Grid item xs={6}>
             <Button
@@ -275,7 +251,7 @@ function RegisterCommunity({ account, contractData }) {
               className="create-btn"
               color="primary"
             >
-              + Create NFT Template
+              + Buy NFTs Templates
             </Button>
           </Grid>
         </Grid>
@@ -387,11 +363,11 @@ function RegisterCommunity({ account, contractData }) {
                   defaultValue=""
                   ref={petTypeRef}
                 >
-                  <MenuItem value="Education">Education</MenuItem>
-                  <MenuItem value="Finance">Finance</MenuItem>
-                  <MenuItem value="Business">Business</MenuItem>
-                  <MenuItem value="Social Good">Social Good</MenuItem>
-                  <MenuItem value="App Development">App Development</MenuItem>
+                  <MenuItem value="Birthday">Birthday</MenuItem>
+                  <MenuItem value="Valentines Day">Valentines Day</MenuItem>
+                  <MenuItem value="Anniversary">Anniversary</MenuItem>
+                  <MenuItem value="Wedding">Wedding</MenuItem>
+                  <MenuItem value="Christmas">Christmas</MenuItem>
                   <MenuItem value="Other">Other</MenuItem>
                 </TextField>
 
